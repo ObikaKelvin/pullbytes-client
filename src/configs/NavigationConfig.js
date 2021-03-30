@@ -7,7 +7,9 @@ import {
   UserOutlined, 
   LockOutlined,
   CreditCardOutlined,
-  BellOutlined
+  BellOutlined,
+  PoweroffOutlined,
+  FileExclamationOutlined
 } from '@ant-design/icons';
 import { APP_PREFIX_PATH } from 'configs/AppConfig'
 
@@ -111,6 +113,22 @@ const dashBoardNavTree = [
       //   submenu: []
       // },
       {
+        key: 'tickets',
+        path: `${APP_PREFIX_PATH}/admin/tickets`,
+        title: 'tickets',
+        icon: FileExclamationOutlined,
+        breadcrumb: false,
+        submenu: []
+      },
+      {
+        key: 'feedback',
+        path: `${APP_PREFIX_PATH}/admin/feedback`,
+        title: 'feedback',
+        icon: TagOutlined,
+        breadcrumb: false,
+        submenu: []
+      },
+      {
         key: 'profile',
         path: `${APP_PREFIX_PATH}/admin/profile`,
         title: 'Profile',
@@ -155,6 +173,30 @@ const userDashBoardNavTree = [
         submenu: []
       },
       {
+        key: 'tickets',
+        path: `${APP_PREFIX_PATH}/user/tickets`,
+        title: 'tickets',
+        icon: FileExclamationOutlined,
+        breadcrumb: false,
+        submenu: []
+      },
+      {
+        key: 'feedback',
+        path: `${APP_PREFIX_PATH}/user/feedback`,
+        title: 'feedback',
+        icon: TagOutlined,
+        breadcrumb: false,
+        submenu: []
+      },
+      // {
+      //   key: 'notifications',
+      //   path: `${APP_PREFIX_PATH}/user/notifications`,
+      //   title: 'notifications',
+      //   icon: BellOutlined,
+      //   breadcrumb: false,
+      //   submenu: []
+      // },
+      {
         key: 'profile',
         path: `${APP_PREFIX_PATH}/user/profile`,
         title: 'Profile',
@@ -186,7 +228,15 @@ const userDashBoardNavTree = [
             submenu: []
           },
         ]
-      }
+      },
+      {
+        key: 'signout',
+        path: `${APP_PREFIX_PATH}/user/signout`,
+        title: 'sign out',
+        icon: PoweroffOutlined,
+        breadcrumb: false,
+        submenu: []
+      },
     ]
   }
 ]
