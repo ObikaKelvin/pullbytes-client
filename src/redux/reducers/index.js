@@ -7,6 +7,8 @@ import LicenseReducer from './LicenseReducer';
 import SalesReducer from './SalesReducer';
 import SubscriptionReducer from './SubscriptionReducer';
 import PaymentReducer from './PaymentReducer';
+import TicketReducer from './TicketReducer';
+import NotificationReducer from './NotificationReducer';
 
 const reducers = combineReducers({
     theme: Theme,
@@ -16,7 +18,9 @@ const reducers = combineReducers({
     licenseReducer: LicenseReducer,
     salesReducer: SalesReducer,
     subscriptionReducer: SubscriptionReducer,
-    PaymentReducer: PaymentReducer
+    PaymentReducer: PaymentReducer,
+    notificationReducer: NotificationReducer,
+    ticketReducer: TicketReducer
 });
 
 export default reducers;
