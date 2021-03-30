@@ -19,7 +19,8 @@ const RegisterOne = props => {
 						<Card>
 							<div className="my-2">
 								<div className="text-center">
-								<img className="img-fluid" src={`/img/${theme === 'light' ? 'logo.png': 'logo-white.png'}`} alt="" />
+								{/* <img className="img-fluid" src={`/img/${theme === 'light' ? 'logo.png': 'logo-white.png'}`} alt="" /> */}
+									<h2>WordPress Webhooks</h2>
 									<p className="text-muted">Create a new account:</p>
 								</div>
 								<Row justify="center">
