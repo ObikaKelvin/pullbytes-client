@@ -26,7 +26,7 @@ const Plans = (props) => {
 		}).catch(err => {
 			console.log(err)
 		})
-	}, []);
+	}, [props.plans]);
 
 	const onSelectPlan = id => e => {
 		const plan = plans.find(plan => plan.id === id);
@@ -35,7 +35,7 @@ const Plans = (props) => {
 	}
 
 	const displayPricing = () => {
-		if(plans){
+		if(plans.length !== 0){
 			return plans.map((elm , i) => {
 				const features = JSON.parse(elm.features)
 				if(elm.type === planType){

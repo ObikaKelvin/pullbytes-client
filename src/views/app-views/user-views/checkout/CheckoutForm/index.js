@@ -11,6 +11,10 @@ import Flex from 'components/shared-components/Flex'
 
 class CheckoutForm extends React.Component {
 
+    state = {
+      submitLoading: false
+    }
+
     componentWillMount(){
         if(!this.props.plan){
             this.props.history.push('/app/user/plans')
@@ -46,21 +50,24 @@ class CheckoutForm extends React.Component {
     if (error) {
       console.log('[error]', error);
     } else {
-      console.log('[PaymentMethod]', paymentMethod);
+      this.setState({
+        submitLoading: true
+      })
       const data = {paymentMethod, planId: this.props.plan.id};
       PaymentService.checkout(data).then(response => {
         checkOut(paymentMethod);
-        console.log(this.props.plan.id)
-      })
+        this.setState({
+          submitLoading: false
+        })
+        message.success('keiks')
 
-    //   fetch({
-    //     url: '/checkout',
-    //     method: 'post',
-    //     data: {paymentMethod, planId: this.props.plan.id}
-    //   }).then(response => {
-    //     // checkOut(paymentMethod);
-    //     console.log(response)
-    //   })
+        console.log(this.props.plan.id)
+      }).catch(error => {
+        this.setState({
+          submitLoading: false
+        })
+        message.error(error)
+      })
 
     }
   };
@@ -76,7 +83,8 @@ class CheckoutForm extends React.Component {
         fontSmoothing: "antialiased",
         "::placeholder": {
           color: "#CFD7DF"
-        }
+        },
+        
       },
       invalid: {
         color: "#e5424d",
@@ -90,24 +98,55 @@ class CheckoutForm extends React.Component {
   render() {
     if(this.props.plan){
         return (
-            // <Flex alignItems="center" justifyContent="center">
-                <Row gutter={2}>
-                    <Col xs={24} sm={24} md={16}>
-                        <Card title="Check Out">
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="product-info">
-                                    <h3 className="product-title">{this.props.plan.name}</h3>
+            // <Flex flexDirection="column" className="w-100" alignItems="center" justifyContent="center">
+            //     <Row gutter={2}>
+            //         <Col xs={24} sm={24} md={16}>
+            //             <Card title="Check Out">
+            //                 <form onSubmit={this.handleSubmit}>
+            //                     <div className="product-info">
+            //                         <h3 className="product-title">{this.props.plan.name}</h3>
                                     
-                                    <h4 className="product-price">${this.props.plan.price}</h4>
-                                </div>
-                                <CardElement options={this.CARD_ELEMENT_OPTIONS} />
-                                <Button type="blue" onClick={this.handleSubmit}>Pay</Button>
-                            </form>
-                        </Card>
-                    </Col>
-                </Row> 
+            //                         <h4 className="product-price">${this.props.plan.price}</h4>
+            //                     </div>
+            //                     <CardElement options={this.CARD_ELEMENT_OPTIONS} />
+            //                     <Button type="blue" onClick={this.handleSubmit}>Pay</Button>
+            //                 </form>
+            //             </Card>
+            //         </Col>
+            //     </Row> 
         
             // </Flex>
+
+
+            <Row gutter={16}>
+              <Col xs={24} sm={24} md={17}>
+                <Card title="Check Out">
+                  <div className="p-3 mb-4">
+                    <div className="text-center">
+                      <h1 className="display-4 mt-4"> 
+                        <span className="font-size-md d-inline-block mr-1" style={{transform: 'translate(0px, -17px)'}}>$</span>
+                        <span>{this.props.plan.price}</span>
+                      </h1>
+                      <p className="mb-0">{this.props.plan.interval}</p>
+                    </div>
+                    <div className="mt-4">
+                      <h2 className="text-center font-weight-semibold">{this.props.plan.name}</h2>
+                    </div>
+                  </div>
+                  <CardElement options={this.CARD_ELEMENT_OPTIONS} />
+                  <Flex className="w-100 mt-4 mb-4" alignItems="center" justifyContent="center">
+                    <Button type="primary" onClick={this.handleSubmit} htmlType="submit" loading={this.state.submitLoading} >
+                      Pay Now (${this.props.plan.price})
+                    </Button>
+                  </Flex>
+                  
+                </Card>
+              </Col>
+              
+            </Row>
+        
+
+            
         );
     }
 

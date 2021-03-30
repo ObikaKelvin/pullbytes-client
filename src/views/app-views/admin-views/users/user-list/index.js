@@ -87,10 +87,6 @@ const UserList = (props) => {
 
 	const tableColumns = [
 		{
-			title: 'ID',
-			dataIndex: 'id'
-		},
-		{
 			title: 'Name',
 			dataIndex: 'name',
 			sorter: (a, b) => utils.antdTableSorter(a, b, 'name')

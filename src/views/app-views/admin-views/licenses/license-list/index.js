@@ -64,6 +64,7 @@ const LicenseList = (props) => {
 			selectedRows.forEach(elm => {
 				data = utils.deleteArrayRow(data, objKey, elm.id)
 				LicenseService.deleteLicense(elm.id).then(resp => {
+					console.log(resp)
 					setList(data)
 					setSelectedRows([])
 					deleteLicense([]);
@@ -92,10 +93,6 @@ const LicenseList = (props) => {
 	}
 
 	const tableColumns = [
-		{
-			title: 'ID',
-			dataIndex: 'id'
-		},
 		{
 			title: 'License Number',
 			dataIndex: 'license_number',

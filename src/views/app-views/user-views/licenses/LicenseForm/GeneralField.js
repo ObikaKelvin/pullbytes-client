@@ -23,7 +23,7 @@ const rules = {
 	active_urls: [
 		{
 			required: true,
-			message: 'Please enter at least website url',
+			message: 'Please enter at least one website url',
 		}
 	]
 }
@@ -36,10 +36,10 @@ const GeneralField = props => {
 			<Col xs={24} sm={24} md={16}>
 				<Card title="Basic Info">
 					<Form.Item name="license_number" label="License Number" >
-						<Input type="text" disabled />
+						<Input type="text" readOnly bordered={false} />
 					</Form.Item>
 					<Form.Item name="plan" label="Plan" >
-						<Input type="text" disabled />
+						<Input type="text" readOnly bordered={false} />
 					</Form.Item>
 					<Form.Item name="status" label="Status" >
 						<Select className="w-100" placeholder="Status">

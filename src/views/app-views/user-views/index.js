@@ -14,6 +14,8 @@ const UserViews = (props) => {
 				<Route path={`${match.url}/licenses`} component={lazy(() => import(`./licenses`))} />
 				<Route path={`${match.url}/plans`} component={lazy(() => import(`./plans`))} />
 				<Route path={`${match.url}/profile`} component={lazy(() => import(`./profile`))} />
+				<Route path={`${match.url}/tickets`} component={lazy(() => import(`./tickets`))} />
+				<Route path={`${match.url}/notifications`} component={lazy(() => import(`./notifications`))} />
 				<Route path={`${match.url}/checkout`} component={lazy(() => import(`./checkout`))} />
 				{/* <Route path="*" exact component={lazy(() => import(`./home`))} /> */}
 				

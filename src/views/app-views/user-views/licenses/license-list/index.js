@@ -59,12 +59,8 @@ const LicenseList = (props) => {
 		}
 		return ''
 	}
-
+	let i = 1;
 	const tableColumns = [
-		{
-			title: 'ID',
-			dataIndex: 'id'
-		},
 		{
 			title: 'License Number',
 			dataIndex: 'license_number',
