@@ -32,6 +32,13 @@ licenseService.updateLicense = function (id, data) {
   })
 }
 
+licenseService.deleteLicense = function (id) {
+  return fetch({
+    url: `/licenses/${id}`,
+    method: 'delete'
+  })
+}
+
 licenseService.getMyLicenses = function () {
   return fetch({
     url: '/me/licenses',
