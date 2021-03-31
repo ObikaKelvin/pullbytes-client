@@ -27,8 +27,7 @@ const auth = (state = initState, action) => {
 				...state,
 				loading: false,
 				redirect: '/app',
-				token: action.token,
-				user: action.user
+				token: action.token
 			}
 		case SETAUTHUSER:
 			return {
@@ -53,7 +52,8 @@ const auth = (state = initState, action) => {
 				...state,
 				token: null,
 				redirect: '/',
-				loading: false
+				loading: false,
+				user: null
 			}
 		}
 		case SIGNUP_SUCCESS: {
