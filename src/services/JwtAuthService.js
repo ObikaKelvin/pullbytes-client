@@ -6,8 +6,14 @@ JwtAuthService.login = function (data) {
 	return fetch({
 		url: '/login',
 		method: 'post',
+		mode: 'cors',
 		headers: {
-      'public-request': 'false'
+			'public-request': 'false',
+			"Access-Control-Allow-Origin":"*",
+			'Access-Control-Allow-Methods': '*',
+			'Access-Control-Allow-Credentials': true,
+			'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type,X-Token-Auth,Authorization',
+			'Accept': 'application/json'
     },
 		data: data
 	})

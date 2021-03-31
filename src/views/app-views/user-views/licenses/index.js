@@ -9,7 +9,7 @@ const Licenses = (props) => {
     const { match } = props;
     return (
 		<Switch>
-			{/* <Redirect exact from={`${match.url}`} to={`${match.url}`} /> */}
+			{/* <Redirect exact from={`${match.url}`} to={`${match.url}/licenses`} /> */}
 			<Route exact path={`${match.url}`} component={LicenseList} />	
 			<Route path={`${match.url}/edit/:id`} component={EditLicense} />
 		</Switch>

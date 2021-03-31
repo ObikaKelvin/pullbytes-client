@@ -8,7 +8,6 @@ const EditProfile = props =>{
 
 	const [form] = Form.useForm();
 	const { user } = props;
-	console.log(user)
 
 	useEffect(() => {
 		form.setFieldsValue({

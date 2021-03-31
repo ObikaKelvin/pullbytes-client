@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import { Card, Table, Select, Input, Button, Menu, Tag } from 'antd';
-import { EyeOutlined, DeleteOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { Card, Table, Input, Menu, Select, Button, Tag, Switch } from 'antd';
+import { EyeOutlined, DeleteOutlined, SearchOutlined, PlusCircleOutlined, CloseOutlined, CheckOutlined} from '@ant-design/icons';
 import EllipsisDropdown from 'components/shared-components/EllipsisDropdown';
 import Flex from 'components/shared-components/Flex'
 import NumberFormat from 'react-number-format';
@@ -9,6 +9,7 @@ import utils from 'utils';
 import { connect } from 'react-redux';
 import { getLicenses, deleteLicense } from 'redux/actions/license';
 import LicenseService from 'services/LicenseService';
+import SubscriptionService from 'services/SubscriptionService';
 import Loading from 'components/shared-components/Loading';
 
 const { Option } = Select
@@ -18,6 +19,7 @@ const LicenseList = (props) => {
 	const { getLicenses, licenses } = props;
 	let history = useHistory();
 	const [list, setList] = useState([]);
+	const [renew, setRenew] = useState('');
 	const [selectedRows, setSelectedRows] = useState([])
 	const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
@@ -88,6 +90,21 @@ const LicenseList = (props) => {
 		return ''
 	}
 
+	const onAutoRenew = id => e => {
+		if(e){
+			SubscriptionService.renewSubscription(id).then( ({ license }) => {
+				console.log(license)
+				setRenew(e)
+			});
+		}
+		else{
+			SubscriptionService.cancelSubscription(id).then( ({ license }) => {
+				console.log(license)
+				setRenew(e)
+			});
+		}
+	}
+
 	const tableColumns = [
 		{
 			title: 'License Number',
@@ -120,9 +137,22 @@ const LicenseList = (props) => {
 			sorter: (a, b) => utils.antdTableSorter(a, b, 'price')
 		},
 		{
-			title: 'Expires at',
-			dataIndex: 'expires_at',
-			sorter: (a, b) => utils.antdTableSorter(a, b, 'expires_at')
+			title: 'Auto Renew',
+			dataIndex: 'auto_renew',
+			sorter: (a, b) => utils.antdTableSorter(a, b, 'auto_renew'),
+			render: (_, record) => {
+				return (
+					<>
+						<Switch
+							checkedChildren={<CheckOutlined />}
+							unCheckedChildren={<CloseOutlined />}
+							checked={record.auto_renew === 'yes' ? true : false}
+							onChange={onAutoRenew(record.id)}
+							disabled
+						/>
+					</>
+				)
+			}
 		},
 		{
 			title: 'Status',

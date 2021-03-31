@@ -54,7 +54,9 @@ const UserForm = props => {
 					license_number: license.license_number,
 					plan: license.plan,
 					status: license.status,
-					expires_at: license.expires_at,
+					expires_at: license.expires_at ? license.expires_at : '--',
+					billing_cycle: license.billing_cycle ? license.billing_cycle : '--',
+					auto_renew: license.auto_renew,
 					active_urls: JSON.parse(license.active_urls)
 				});
 			});
@@ -95,7 +97,7 @@ const UserForm = props => {
 			}
 			if(mode === EDIT) {
 				const { id } = param;
-				LicenseService.updateLicense(id, values).then(({ license }) => {
+				LicenseService.updateMyLicense(id, values).then(({ license }) => {
 					updateLicense(license)
 					message.success(`License has been updated`);
 					setSubmitLoading(false);
