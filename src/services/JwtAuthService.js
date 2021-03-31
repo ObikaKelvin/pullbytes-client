@@ -18,9 +18,19 @@ JwtAuthService.signUp = function (data) {
 		url: '/register',
 		method: 'post',
 		headers: {
-      'public-request': 'true'
+      'public-request': 'false'
     },
 		data: data
+	})
+}
+
+JwtAuthService.signOut = function (data) {
+	return fetch({
+		url: '/logout',
+		method: 'post',
+		headers: {
+      'public-request': 'false'
+    },
 	})
 }
 
