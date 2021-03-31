@@ -27,7 +27,7 @@ licenseService.createLicense = function (data) {
 licenseService.updateLicense = function (id, data) {
   return fetch({
     url: `/licenses/${id}`,
-    method: 'put',
+    method: 'patch',
     data
   })
 }
@@ -50,6 +50,14 @@ licenseService.getMyLicense = function (id) {
   return fetch({
     url: `/me/licenses/${id}`,
     method: 'get'
+  })
+}
+
+licenseService.updateMyLicense = function (id, data) {
+  return fetch({
+    url: `/me/cancel_subscription/${id}`,
+    method: 'patch',
+    data
   })
 }
 
