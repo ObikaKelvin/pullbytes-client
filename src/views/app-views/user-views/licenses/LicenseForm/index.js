@@ -9,7 +9,6 @@ import GeneralField from './GeneralField'
 import { getLicense, createLicense, updateLicense } from 'redux/actions/license';
 import LicenseService from "services/LicenseService"
 import PlanService from "services/PlanService"
-import UserService from "services/UserService"
 
 
 const { TabPane } = Tabs;

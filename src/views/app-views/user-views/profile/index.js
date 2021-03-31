@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, Component } from 'react';
+import React, { Suspense, Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Loading from 'components/shared-components/Loading';
 import InnerAppLayout from 'layouts/inner-app-layout';

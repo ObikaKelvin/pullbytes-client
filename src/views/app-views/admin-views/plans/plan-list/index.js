@@ -1,19 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import { Card, Table, Select, Input, Button, Badge, Menu } from 'antd';
-import ProductListData from "assets/data/product-list.data.json"
 import { EyeOutlined, DeleteOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import AvatarStatus from 'components/shared-components/AvatarStatus';
 import EllipsisDropdown from 'components/shared-components/EllipsisDropdown';
 import Flex from 'components/shared-components/Flex'
 import NumberFormat from 'react-number-format';
 import { useHistory } from "react-router-dom";
 import utils from 'utils';
-import { env } from 'configs/EnvironmentConfig'
 import { connect } from 'react-redux';
-import { set } from 'lodash';
 import { getPlans, deletePlan } from 'redux/actions/plan';
 import PlanService from 'services/PlanService';
-import isAdmin from 'components/hoc/isAdmin';
 import Loading from 'components/shared-components/Loading';
 
 const { Option } = Select

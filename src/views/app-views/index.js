@@ -3,17 +3,11 @@ import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Loading from 'components/shared-components/Loading';
 import { APP_PREFIX_PATH } from 'configs/AppConfig'
-import { AUTH_PREFIX_PATH } from 'configs/AppConfig'
-import isAdmin from '../../components/hoc/isAdmin'
 import { AUTH_TOKEN } from 'redux/constants/Auth'
-import DataService from '../../services/DataService'
 
 
 
 export const AppViews = (props) => {
-
-  const [path, setPath] = useState('');
-  const [authUser, setAuthUser] = useState('');
   const { user } = props;
 
   const jwtToken = localStorage.getItem(AUTH_TOKEN)

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Card, Table, Select, Input, Button, Badge, Menu, Spin, Tag } from 'antd';
+import { Card, Table, Select, Input, Button, Menu, Tag } from 'antd';
 import { EyeOutlined, DeleteOutlined, SearchOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import EllipsisDropdown from 'components/shared-components/EllipsisDropdown';
 import Flex from 'components/shared-components/Flex'
@@ -10,12 +10,9 @@ import { getNotifications, deleteNotification } from 'redux/actions/notification
 import NotificationService from 'services/NotificationService';
 import Loading from 'components/shared-components/Loading';
 
-const { Option } = Select
-
 const NotificationList = (props) => {	
 	
 	const { getNotifications, notifications } = props;
-	console.log(props)
 	let history = useHistory();
 	const [list, setList] = useState([]);
 	const [selectedRows, setSelectedRows] = useState([])

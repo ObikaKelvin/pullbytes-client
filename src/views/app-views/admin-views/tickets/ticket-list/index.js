@@ -10,7 +10,6 @@ import { getTickets, deleteTicket } from 'redux/actions/ticket';
 import TicketService from 'services/TicketService';
 import Loading from 'components/shared-components/Loading';
 
-const { Option } = Select
 
 const TicketList = (props) => {	
 	

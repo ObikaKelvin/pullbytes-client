@@ -1,9 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Input, Row, Col, Card, Form, Upload, InputNumber, message, Select } from 'antd';
-import { ImageSvg } from 'assets/svg/icon';
-import CustomIcon from 'components/util-components/CustomIcon'
-import { LoadingOutlined } from '@ant-design/icons';
-import DataService from '../../../../../services/DataService';
+import { Input, Row, Col, Card, Form, Select } from 'antd';
 
 const { Option } = Select;
 

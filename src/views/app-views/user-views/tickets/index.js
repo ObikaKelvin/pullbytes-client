@@ -4,7 +4,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import TicketList from './ticket-list';
 import AddTicket from './add-tickets';
 import EditTicket from './edit-ticket';
-// import AddLicense from './add-license';
 
 
 const Tickets = (props) => {

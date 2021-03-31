@@ -1,11 +1,7 @@
 import React from 'react'
-import { Input, Row, Col, Card, Form, Upload, InputNumber, message, Select } from 'antd';
-import { ImageSvg } from 'assets/svg/icon';
-import CustomIcon from 'components/util-components/CustomIcon'
-import { LoadingOutlined } from '@ant-design/icons';
+import { Input, Row, Col, Card, Form, message, Select } from 'antd';
 
 const { Option } = Select;
-const { Dragger } = Upload;
 
 const rules = {
 	name: [

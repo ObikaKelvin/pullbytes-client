@@ -2,14 +2,11 @@ import React, { lazy, Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { APP_PREFIX_PATH, AUTH_PREFIX_PATH } from 'configs/AppConfig'
-// import { connect } from 'redux/actions/Auth';
-
 import Loading from 'components/shared-components/Loading';
 
 
 const AdminViews = (props) => {
-    const { match, user } = props;
+    const { match } = props;
     return (
 
 		<Suspense fallback={<Loading cover="content"/>}>
@@ -27,11 +24,6 @@ const AdminViews = (props) => {
 			</Switch>
 		</Suspense>
 	)
-}
-
-const mapStateToProps = ({ auth }) => {
-	const {user} = auth;
-	return {user}
 }
 
 export default connect(null)(AdminViews);

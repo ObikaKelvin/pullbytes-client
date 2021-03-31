@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { set } from "lodash";
 import UserService from "../../services/UserService";
-import auth from "../../redux/reducers/Auth";
 
 
 

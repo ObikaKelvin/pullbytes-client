@@ -4,7 +4,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import UserList from './user-list/index';
 import AddUser from './add-user';
 import EditUser from './edit-user';
-// import AddLicense from './add-license';
 
 
 const Users = (props) => {
@@ -15,7 +14,6 @@ const Users = (props) => {
 			<Route exact path={`${match.url}`} component={UserList} />	
 			<Route exact path={`${match.url}/add`} component={AddUser} />
 			<Route path={`${match.url}/edit/:id`} component={EditUser} />
-			{/* <Route path={`${match.url}/orders`} component={Orders} /> */}
 		</Switch>
 	)
 } 

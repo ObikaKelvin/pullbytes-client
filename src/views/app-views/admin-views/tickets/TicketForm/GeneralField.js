@@ -1,7 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import { Input, Row, Col, Card, Form, Upload, InputNumber, message, Select } from 'antd';
-
-const { Option } = Select;
+import React from 'react'
+import { Input, Row, Col, Card, Form } from 'antd';
 
 const rules = {
 	title: [

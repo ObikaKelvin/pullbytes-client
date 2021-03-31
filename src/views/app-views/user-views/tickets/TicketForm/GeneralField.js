@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { Input, Row, Col, Card, Form, Upload, InputNumber, message, Select } from 'antd';
 
-const { Option } = Select;
-
 const rules = {
 	title: [
 		{
@@ -19,7 +17,6 @@ const rules = {
 }
 
 const GeneralField = props => {
-	const status = ['active', 'inactive', 'expired'];
 	return(
 		<Row gutter={16}>
 			<Col xs={24} sm={24} md={16}>

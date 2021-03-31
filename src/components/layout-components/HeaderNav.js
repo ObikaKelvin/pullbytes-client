@@ -6,18 +6,16 @@ import Logo from './Logo';
 import NavPanel from './NavPanel';
 import NavProfile from './NavProfile';
 import NavSearch  from './NavSearch';
+import utils from 'utils'
 import { toggleCollapsedNav, onMobileNavToggle } from 'redux/actions/Theme';
 import { NAV_TYPE_TOP, SIDE_NAV_COLLAPSED_WIDTH, SIDE_NAV_WIDTH } from 'constants/ThemeConstant';
-import utils from 'utils'
 import UserService from 'services/UserService'
-import { getMe } from 'redux/actions/user'
 import { setAuthUser } from 'redux/actions/Auth'
-import history from "../../history";
 
 const { Header } = Layout;
 
 export const HeaderNav = props => {
-  const { navCollapsed, mobileNav, navType, headerNavColor, toggleCollapsedNav, onMobileNavToggle, isMobile, currentTheme, getMe, token, setAuthUser, user } = props;
+  const { navCollapsed, mobileNav, navType, headerNavColor, toggleCollapsedNav, onMobileNavToggle, isMobile, currentTheme, token, setAuthUser, user } = props;
   const [searchActive, setSearchActive] = useState(false)
 
 
@@ -102,7 +100,7 @@ const mapStateToProps = ({ theme, userReducer, auth }) => {
 };
 
 const mapDispatchToProps = {
-  toggleCollapsedNav, onMobileNavToggle, getMe, setAuthUser
+  toggleCollapsedNav, onMobileNavToggle, setAuthUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderNav);

@@ -1,9 +1,5 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { Input, Row, Col, Card, Form, Upload, InputNumber, message, Select } from 'antd';
-import { ImageSvg } from 'assets/svg/icon';
-import CustomIcon from 'components/util-components/CustomIcon'
-import { LoadingOutlined } from '@ant-design/icons';
-import DataService from '../../../../../services/DataService';
 
 const { Option } = Select;
 
@@ -28,7 +24,7 @@ const rules = {
 	]
 }
 
-const GeneralField = props => {
+const GeneralField = () => {
 	const status = ['active', 'inactive'];
 	const renew = ['renew', 'cancel'];
 	return(

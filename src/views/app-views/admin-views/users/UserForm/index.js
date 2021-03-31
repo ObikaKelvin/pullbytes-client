@@ -7,7 +7,7 @@ import { Tabs, Form, Button, message } from 'antd';
 import Flex from 'components/shared-components/Flex'
 import GeneralField from './GeneralField'
 import UserService from "services/UserService"
-import { getUser, updateUser, createUser, updateMe } from 'redux/actions/user';
+import { getUser, updateUser, createUser } from 'redux/actions/user';
 
 
 

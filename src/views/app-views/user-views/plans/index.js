@@ -20,7 +20,6 @@ const Plans = (props) => {
 	console.log('isMobile', isMobile)
 
 	useEffect(() => {
-		console.log(planService)
 		planService.getPlans().then(({ plans }) => {
 			setPlans(plans);
 		}).catch(err => {
