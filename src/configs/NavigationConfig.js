@@ -120,22 +120,55 @@ const dashBoardNavTree = [
         breadcrumb: false,
         submenu: []
       },
-      {
-        key: 'feedback',
-        path: `${APP_PREFIX_PATH}/admin/feedback`,
-        title: 'feedback',
-        icon: TagOutlined,
-        breadcrumb: false,
-        submenu: []
-      },
+      // {
+      //   key: 'feedback',
+      //   path: `${APP_PREFIX_PATH}/admin/feedback`,
+      //   title: 'feedback',
+      //   icon: TagOutlined,
+      //   breadcrumb: false,
+      //   submenu: []
+      // },
       {
         key: 'profile',
         path: `${APP_PREFIX_PATH}/admin/profile`,
         title: 'Profile',
-        icon: DashboardOutlined,
+        icon: UserOutlined,
+        breadcrumb: false,
+        submenu: [
+          {
+            key: 'edit-profile',
+            path: `${APP_PREFIX_PATH}/admin/profile/edit-profile`,
+            title: 'Edit Profile',
+            icon: UserOutlined,
+            breadcrumb: false,
+            submenu: []
+          },
+          {
+            key: 'change-password',
+            path: `${APP_PREFIX_PATH}/admin/profile/change-password`,
+            title: 'Change Password',
+            icon: LockOutlined,
+            breadcrumb: false,
+            submenu: []
+          },
+          // {
+          //   key: 'billing',
+          //   path: `${APP_PREFIX_PATH}/admin/profile/billing`,
+          //   title: 'Billing',
+          //   icon: CreditCardOutlined,
+          //   breadcrumb: false,
+          //   submenu: []
+          // },
+        ]
+      },
+      {
+        key: 'signout',
+        path: `${APP_PREFIX_PATH}/admin/signout`,
+        title: 'sign out',
+        icon: PoweroffOutlined,
         breadcrumb: false,
         submenu: []
-      }
+      },
     ]
   }, 
 ]
@@ -148,11 +181,19 @@ const userDashBoardNavTree = [
     icon: DashboardOutlined,
     breadcrumb: false,
     submenu: [
+      // {
+      //   key: 'home',
+      //   path: `${APP_PREFIX_PATH}/user/home`,
+      //   title: 'home',
+      //   icon: DashboardOutlined,
+      //   breadcrumb: false,
+      //   submenu: []
+      // },
       {
-        key: 'home',
-        path: `${APP_PREFIX_PATH}/user/home`,
-        title: 'home',
-        icon: DashboardOutlined,
+        key: 'licenses',
+        path: `${APP_PREFIX_PATH}/user/licenses`,
+        title: 'licenses',
+        icon: TagOutlined,
         breadcrumb: false,
         submenu: []
       },
@@ -165,14 +206,6 @@ const userDashBoardNavTree = [
         submenu: []
       },
       {
-        key: 'licenses',
-        path: `${APP_PREFIX_PATH}/user/licenses`,
-        title: 'licenses',
-        icon: TagOutlined,
-        breadcrumb: false,
-        submenu: []
-      },
-      {
         key: 'tickets',
         path: `${APP_PREFIX_PATH}/user/tickets`,
         title: 'tickets',
@@ -180,14 +213,14 @@ const userDashBoardNavTree = [
         breadcrumb: false,
         submenu: []
       },
-      {
-        key: 'feedback',
-        path: `${APP_PREFIX_PATH}/user/feedback`,
-        title: 'feedback',
-        icon: TagOutlined,
-        breadcrumb: false,
-        submenu: []
-      },
+      // {
+      //   key: 'feedback',
+      //   path: `${APP_PREFIX_PATH}/user/feedback`,
+      //   title: 'feedback',
+      //   icon: TagOutlined,
+      //   breadcrumb: false,
+      //   submenu: []
+      // },
       // {
       //   key: 'notifications',
       //   path: `${APP_PREFIX_PATH}/user/notifications`,
@@ -219,14 +252,14 @@ const userDashBoardNavTree = [
             breadcrumb: false,
             submenu: []
           },
-          {
-            key: 'billing',
-            path: `${APP_PREFIX_PATH}/user/profile/billing`,
-            title: 'Billing',
-            icon: CreditCardOutlined,
-            breadcrumb: false,
-            submenu: []
-          },
+          // {
+          //   key: 'billing',
+          //   path: `${APP_PREFIX_PATH}/user/profile/billing`,
+          //   title: 'Billing',
+          //   icon: CreditCardOutlined,
+          //   breadcrumb: false,
+          //   submenu: []
+          // },
         ]
       },
       {
