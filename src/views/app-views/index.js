@@ -19,14 +19,12 @@ export const AppViews = (props) => {
 
   useEffect(() => {
     // if(user){
-      console.log(user)
       if(user && user.role === "admin"){
         history.push('/app/admin')
-        console.log(`user role: ${user.role}`)
       }
-      // else if(user && user.role === "customer"){
-      //   history.push('/app/user')
-      // }
+      else if(user && user.role === "customer"){
+        history.push('/app/user')
+      }
 
       // else{
       //   history.push('/app')

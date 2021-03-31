@@ -24,10 +24,10 @@ const GeneralField = props => {
 				<Card title="Basic Info">
 					
 					<Form.Item name="title" label="Title" rules={rules.title}>
-						<Input type="text" />
+						<Input type="text" readOnly bordered={false} />
 					</Form.Item>
 					<Form.Item name="message" label="Message" rules={rules.message}>
-						<Input.TextArea rows={4} />
+						<Input.TextArea rows={4} readOnly bordered={false} />
 					</Form.Item>
 					<Form.Item name="reply" label="Reply" rules={rules.reply}>
 						<Input.TextArea rows={4} />

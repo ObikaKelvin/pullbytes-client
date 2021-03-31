@@ -9,7 +9,7 @@ const UserViews = (props) => {
     return (
 		<Suspense fallback={<Loading cover="content"/>}>
 			<Switch>
-				{/* <Redirect exact from={`${match.url}`} to={`${match.url}/home`} /> */}
+				<Redirect exact from={`${match.url}`} to={`${match.url}/licenses`} />
 				{/* <Route path={`${match.url}/home`} component={lazy(() => import(`./home`))} /> */}
 				<Route path={`${match.url}/licenses`} component={lazy(() => import(`./licenses`))} />
 				<Route path={`${match.url}/plans`} component={lazy(() => import(`./plans`))} />
@@ -17,6 +17,7 @@ const UserViews = (props) => {
 				<Route path={`${match.url}/tickets`} component={lazy(() => import(`./tickets`))} />
 				<Route path={`${match.url}/notifications`} component={lazy(() => import(`./notifications`))} />
 				<Route path={`${match.url}/checkout`} component={lazy(() => import(`./checkout`))} />
+				<Route path={`${match.url}/signout`} component={lazy(() => import(`./signout`))} />
 				{/* <Route path="*" exact component={lazy(() => import(`./home`))} /> */}
 				
 			</Switch>

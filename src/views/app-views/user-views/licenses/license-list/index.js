@@ -1,22 +1,24 @@
 import React, {useState, useEffect} from 'react'
-import { Card, Table, Input, Menu, Tag } from 'antd';
-import { EyeOutlined, SearchOutlined} from '@ant-design/icons';
+import { Card, Table, Input, Menu, Tag, Switch } from 'antd';
+import { EyeOutlined, SearchOutlined, CloseOutlined, CheckOutlined} from '@ant-design/icons';
 import EllipsisDropdown from 'components/shared-components/EllipsisDropdown';
 import Flex from 'components/shared-components/Flex'
 import NumberFormat from 'react-number-format';
 import { useHistory } from "react-router-dom";
 import utils from 'utils';
 import { connect } from 'react-redux';
-import { getLicenses, deleteLicense } from 'redux/actions/license';
+import { getLicenses, getLicense } from 'redux/actions/license';
 import LicenseService from 'services/LicenseService';
+import SubscriptionService from 'services/SubscriptionService';
 import Loading from 'components/shared-components/Loading';
 
 
 const LicenseList = (props) => {	
 	
-	const { getLicenses, licenses } = props;
+	const { getLicenses, licenses, getLicense } = props;
 	let history = useHistory();
 	const [list, setList] = useState([]);
+	const [renew, setRenew] = useState('');
 	const [selectedRows, setSelectedRows] = useState([])
 	const [selectedRowKeys, setSelectedRowKeys] = useState([])
 
@@ -25,7 +27,7 @@ const LicenseList = (props) => {
 			getLicenses(licenses);
 			setList(licenses)
 		});
-	}, []);
+	}, [renew]);
 
 	const dropdownMenu = row => (
 		<Menu>
@@ -54,6 +56,22 @@ const LicenseList = (props) => {
 		}
 		return ''
 	}
+
+	const onAutoRenew = id => e => {
+		if(e){
+			SubscriptionService.renewSubscription(id).then( ({ license }) => {
+				console.log(license)
+				setRenew(e)
+			});
+		}
+		else{
+			SubscriptionService.cancelSubscription(id).then( ({ license }) => {
+				console.log(license)
+				setRenew(e)
+			});
+		}
+	}
+
 	const tableColumns = [
 		{
 			title: 'License Number',
@@ -64,6 +82,11 @@ const LicenseList = (props) => {
 			title: 'Plan',
 			dataIndex: 'plan',
 			sorter: (a, b) => utils.antdTableSorter(a, b, 'plan')
+		},
+		{
+			title: 'Interval',
+			dataIndex: 'interval',
+			sorter: (a, b) => utils.antdTableSorter(a, b, 'interval')
 		},
 		{
 			title: 'Amount',
@@ -81,10 +104,42 @@ const LicenseList = (props) => {
 			sorter: (a, b) => utils.antdTableSorter(a, b, 'price')
 		},
 		{
-			title: 'Expires at',
-			dataIndex: 'expires_at',
-			sorter: (a, b) => utils.antdTableSorter(a, b, 'expires_at')
+			title: 'Auto Renew',
+			dataIndex: 'auto_renew',
+			sorter: (a, b) => utils.antdTableSorter(a, b, 'auto_renew'),
+			render: (_, record) => {
+				return (
+					<>
+						<Switch
+							checkedChildren={<CheckOutlined />}
+							unCheckedChildren={<CloseOutlined />}
+							checked={record.auto_renew === 'yes' ? true : false}
+							onChange={onAutoRenew(record.id)}
+						/>
+					</>
+				)
+			}
 		},
+		// {
+		// 	title: 'Billing Cycle',
+		// 	dataIndex: 'billing_cycle',
+		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'billing_cycle'),
+		// 	render: (_, record) => (
+		// 		record.billing_cycle ? 
+		// 		<>{record.billing_cycle}</> : 
+		// 		<>--</>
+		// 	),
+		// },
+		// {
+		// 	title: 'Expires at',
+		// 	dataIndex: 'expires_at',
+		// 	sorter: (a, b) => utils.antdTableSorter(a, b, 'expires_at'),
+		// 	render: (_, record) => (
+		// 		record.expires_at ? 
+		// 		<>{record.expires_at}</> : 
+		// 		<>--</>
+		// 	),
+		// },
 		{
 			title: 'Status',
 			dataIndex: 'status',
@@ -175,7 +230,7 @@ function mapStateToProps({ licenseReducer }){
 	return { licenses };
 }
 
-const mapDispatchToProps = { getLicenses }
+const mapDispatchToProps = { getLicenses, getLicense }
 
 export default connect(mapStateToProps, mapDispatchToProps
 )(LicenseList);
