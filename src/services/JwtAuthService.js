@@ -7,7 +7,8 @@ JwtAuthService.login = function (data) {
 		url: '/login',
 		method: 'post',
 		headers: {
-      'public-request': 'false'
+      'public-request': 'false',
+	  "Access-Control-Allow-Origin":"https://wordpress-webhooks-dashboard.herokuapp.com/"
     },
 		data: data
 	})
