@@ -163,7 +163,7 @@ const TicketList = (props) => {
 						</div> */}
 					</Flex>
 					<div>
-						<Button onClick={createTicket} type="primary" icon={<PlusCircleOutlined />} block>Create Ticket</Button>
+						{/* <Button onClick={createTicket} type="primary" icon={<PlusCircleOutlined />} block>Create Ticket</Button> */}
 					</div>
 				</Flex>
 				<div className="table-responsive">

@@ -44,9 +44,9 @@ const UserForm = props => {
 			setUsers(response.users);
 		});
 		if(mode === EDIT) {
-			console.log('is edit')
-			console.log('props', props)
 			const { id } = param;
+
+			console.log(id)
 
 			const licenseId = parseInt(id)
 			
@@ -55,9 +55,10 @@ const UserForm = props => {
 				form.setFieldsValue({
 					license_number: license.license_number,
 					plan: license.plan,
-					users: license.user,
 					status: license.status,
-					expires_at: license.expires_at,
+					expires_at: license.expires_at ? license.expires_at : '--',
+					billing_cycle: license.billing_cycle ? license.billing_cycle : '--',
+					auto_renew: license.auto_renew,
 					active_urls: JSON.parse(license.active_urls)
 				});
 			});
@@ -94,6 +95,8 @@ const UserForm = props => {
 					setTimeout(() => {
 						history.push('/app/admin/licenses');
 					}, 1000)
+				}).catch(err => {
+					setSubmitLoading(false);
 				});
 			}
 			if(mode === EDIT) {
@@ -143,7 +146,7 @@ const UserForm = props => {
 					<Tabs defaultActiveKey="1" style={{marginTop: 30}}>
 						<TabPane tab="General" key="1">
 							<GeneralField
-								license_id = {mode === EDIT ? param.id : null}
+								mode={mode}
 								plans = {plans}
 								users = {users}
 								uploadedImg={uploadedImg} 
