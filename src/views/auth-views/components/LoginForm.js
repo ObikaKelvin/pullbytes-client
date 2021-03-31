@@ -9,7 +9,8 @@ import {
 	showLoading, 
 	showAuthMessage, 
 	hideAuthMessage,
-	authenticated
+	authenticated,
+	signOut
 } from 'redux/actions/Auth';
 import {
 	AUTH_TOKEN,
@@ -36,17 +37,25 @@ export const LoginForm = (props) => {
 		token,
 		user,
 		redirect,
-		allowRedirect
+		allowRedirect,
+		signOut
 	} = props
 
 	const onLogin = values => {
 		showLoading()
-		const fakeToken = 'fakeToken'
 		JwtAuthService.login(values).then(resp => {
 			console.log(resp.token)
 			localStorage.setItem(AUTH_TOKEN, resp.token)
 			authenticated(resp)
 			history.push('/app');
+		}).catch(error => {
+			if(error.response){
+				showAuthMessage(error.response.data.message)
+			}
+			else{
+				showAuthMessage('Something went wrong, please try again.')
+			}
+			
 		})
 	};
 
@@ -59,14 +68,15 @@ export const LoginForm = (props) => {
 	}
 
 	useEffect(() => {
-		if (token !== null && user !== null && allowRedirect) {
-			history.push(redirect)
-		}
 		if(showMessage) {
 			setTimeout(() => {
-			hideAuthMessage();
-		}, 3000);
+				hideAuthMessage();
+			}, 3000);
+			if (token !== null && user !== null && allowRedirect) {
+				history.push(redirect)
+			}
 		}
+		
 	});
 	
 	const renderOtherSignIn = (
@@ -121,7 +131,7 @@ export const LoginForm = (props) => {
 						},
 						{ 
 							type: 'email',
-							message: 'Please enter a validate email!'
+							message: 'Please enter a valid email!'
 						}
 					]}>
 					<Input prefix={<MailOutlined className="text-primary" />}/>
@@ -188,7 +198,8 @@ const mapDispatchToProps = {
 	showAuthMessage,
 	showLoading,
 	hideAuthMessage,
-	authenticated
+	authenticated,
+	signOut
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
