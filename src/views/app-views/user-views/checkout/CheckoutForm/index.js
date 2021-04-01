@@ -56,9 +56,9 @@ class CheckoutForm extends React.Component {
       this.setState({
         submitLoading: true
       })
-      const data = {paymentMethod, planId: this.props.plan.id};
+      const data = {payment_id: paymentMethod.id, planId: this.props.plan.id};
       PaymentService.checkout(data).then(response => {
-        console.log(response)
+        console.log(paymentMethod)
         checkOut(paymentMethod);
         // message.success(`successfully purchased `)
         message.success(`successfully purchased ${response.plan.name}`)
