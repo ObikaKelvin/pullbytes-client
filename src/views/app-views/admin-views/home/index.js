@@ -390,7 +390,7 @@ const Home = () => {
 		for (let i = 0; i < plan_sales.length; i++) {
 			const data = plan_sales[i].sale;
 			sessionData.push(data);
-			const label = plan_sales[i].name;
+			const label = `${plan_sales[i].name} - ${plan_sales[i].interval}`;
 			sessionLabels.push(label);
 			const color = sessionColor[i]
 			combinedSessionData = [...combinedSessionData, {
