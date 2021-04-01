@@ -7,7 +7,7 @@ const rules = {
 	name: [
 		{
 			required: true,
-			message: 'Please enter planname',
+			message: 'Please enter plan name',
 		}
 	],
 	interval: [
@@ -26,12 +26,6 @@ const rules = {
 		{
 			required: true,
 			message: 'Please enter plan price',
-		}
-	],
-	active_url_number: [
-		{
-			required: true,
-			message: 'Please enter the number of urls this plan will support',
 		}
 	],
 	description: [
@@ -81,14 +75,13 @@ const GeneralField = props => (
 		</Col>
 		<Col xs={24} sm={24} md={7}>
 			<Card title="Organization">
-				<Form.Item name="active_url_number" label="Active url number" rules={rules.active_url_number}>
+				<Form.Item name="active_url_number" label="Active url number" >
 					<Input placeholder="Active url number" />
 				</Form.Item>
 				<Form.Item name="interval" label="Interval" rules={rules.interval}>
 					<Select className="w-100" placeholder="Type">
-						<Option key="yearly" value="year">Yearly</Option>
-						<Option key="monthly" value="month">Monthly</Option>
-						<Option key="none" value="none">None</Option>
+						<Option key="yearly" value="year">Year</Option>
+						<Option key="lifetime" value="lifetime">Lifetime</Option>
 					</Select>
 				</Form.Item>
 				
