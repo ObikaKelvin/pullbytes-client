@@ -312,7 +312,7 @@ const Home = () => {
 					</Col>
 					<Col xs={24} sm={24} md={24} lg={16}>
 						<div className="mb-3 text-right">
-							<Button icon={<CloudDownloadOutlined/>}>Download Report</Button>
+							{/* <Button icon={<CloudDownloadOutlined/>}>Download Report</Button> */}
 						</div>
 						{displayChartWidget()}
 					</Col>
