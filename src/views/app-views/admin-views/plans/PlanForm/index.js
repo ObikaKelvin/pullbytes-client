@@ -72,7 +72,7 @@ const PlanForm = props => {
 				setSubmitLoading(false)
 				if(mode === ADD) {
 					PlanService.createPlan(values).then(response => {
-						message.success(`Created ${response.name} to plan list`);
+						message.success(`Created ${response.plan.name} to plan list`);
 						setSubmitLoading(false);
 						setTimeout(() => {
 							history.push('/app/admin/plans');

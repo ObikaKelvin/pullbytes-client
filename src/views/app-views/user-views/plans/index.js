@@ -36,7 +36,10 @@ const Plans = (props) => {
 	const displayPricing = () => {
 		if(plans.length !== 0){
 			return plans.map((elm , i) => {
-				const features = JSON.parse(elm.features)
+				// const features = JSON.parse(elm.features)
+				// console.log(features.join('/').split('\n'))
+				const featuresJson = JSON.parse(elm.features)
+				const features = featuresJson.join('/').split('\n')
 				if(elm.type === planType){
 					return (
 						<Col key={`price-column-${i}`} xs={24} sm={24} md={24/colCount} lg={24/colCount} className={colCount === (i + 1) || isMobile ? '' : 'border-right'}>
