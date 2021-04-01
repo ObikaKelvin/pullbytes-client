@@ -17,6 +17,29 @@ const rules = {
 }
 
 const GeneralField = props => {
+	if(props.mode === 'EDIT')
+	{
+		return(
+			<Row gutter={16}>
+				<Col xs={24} sm={24} md={16}>
+					<Card title="Basic Info">
+						
+						<Form.Item name="title" label="Title" rules={rules.title}>
+							<Input type="text" bordered={false} readOnly/>
+						</Form.Item>
+						<Form.Item name="message" label="Message" rules={rules.message}>
+							<Input.TextArea rows={4} bordered={false} readOnly />
+						</Form.Item>
+						<Form.Item name="reply" label="reply" >
+							<Input.TextArea rows={4} bordered={false} readOnly />
+						</Form.Item>
+						
+					</Card>
+				</Col>			
+			</Row>
+		)
+	}
+
 	return(
 		<Row gutter={16}>
 			<Col xs={24} sm={24} md={16}>
