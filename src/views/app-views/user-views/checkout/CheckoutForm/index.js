@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {CardElement, ElementsConsumer} from '@stripe/react-stripe-js';
-import { Input, Row, Col, Card, Form, Upload, InputNumber, message, Select, Button } from 'antd';
+import { Input, Row, Col, Card, Form, Upload, InputNumber, message, notification, Select, Button } from 'antd';
 import {checkOut } from 'redux/actions/payment';
 import PaymentService from 'services/PaymentService';
 import fetch from 'auth/FetchInterceptor'
@@ -26,6 +26,9 @@ class CheckoutForm extends React.Component {
   handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
+    this.setState({
+      submitLoading: false
+    })
 
     const {stripe, elements, plan} = this.props;
 
@@ -55,18 +58,23 @@ class CheckoutForm extends React.Component {
       })
       const data = {paymentMethod, planId: this.props.plan.id};
       PaymentService.checkout(data).then(response => {
+        console.log(response)
         checkOut(paymentMethod);
-        this.setState({
-          submitLoading: false
-        })
-        message.success('keiks')
+        // message.success(`successfully purchased `)
+        message.success(`successfully purchased ${response.plan.name}`)
+        setTimeout(() => {
+          this.props.history.push(`/app/user/licenses/edit/${response.license.id}`)
+        }, 2000);
 
         console.log(this.props.plan.id)
       }).catch(error => {
         this.setState({
           submitLoading: false
         })
-        message.error(error)
+        if(error.response){
+          notification.error({message: error.response.data.message})
+          console.log(error.response.data.message)
+        }
       })
 
     }
