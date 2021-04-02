@@ -11,12 +11,12 @@ subscriptionService.renewSubscription = function (id, data) {
 }
 
 subscriptionService.cancelSubscription = function (id, data) {
-    return fetch({
-      url: `/me/cancel_subscription/${id}`,
-      method: 'patch',
-      data
-    })
-  }
+  return fetch({
+    url: `/me/cancel_subscription/${id}`,
+    method: 'patch',
+    data
+  })
+}
 
 
 export default subscriptionService

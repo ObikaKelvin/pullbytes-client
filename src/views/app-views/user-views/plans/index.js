@@ -2,22 +2,42 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import planService from 'services/PlanService'
-import { Row, Col, Card, Grid, Button, Badge, Switch, Skeleton } from 'antd';
+import {Elements, ElementsConsumer} from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { Row, Col, Card, Grid, Button, Badge, Tooltip, Switch, Skeleton, Form, Input, Modal } from 'antd';
+import { CreditCardOutlined, CalendarOutlined, QuestionCircleOutlined, DeleteOutlined } from '@ant-design/icons';
+import { ROW_GUTTER } from 'constants/ThemeConstant';
 import { pricingData } from './pricingData';
 import utils from 'utils';
 import Flex from 'components/shared-components/Flex'
 import { getPlan } from 'redux/actions/plan'
+import PlanForm from './PlanForm/index'
+
 
 const { useBreakpoint } = Grid;
 
 
 const Plans = (props) => {
 	const [plans, setPlans] = useState([]);
+	const [intent, setIntent] = useState('');
 	const [planType, setPlanType] = useState('recurring');
+	const [modalVisible, setModalVisible] = useState(false);
+	const stripePromise = loadStripe('pk_test_51IQDijHxFZiZPKLwJ5ntaanXO3k7mWX4PpWg2X6T5yggA8zTBIirXBuf8yZsxKBuUubjxEjhGnlEE6L3ZrOxUTvj00eQgkDNlR');
+
+	
+	const [form] = Form.useForm();
 	const isMobile = !utils.getBreakPoint(useBreakpoint()).includes('lg')
 	const colCount = pricingData.length
 	const history = useHistory();
 	console.log('isMobile', isMobile)
+
+	const showModal = () => {
+		setModalVisible(true)
+	};
+
+	const closeModal = () => {
+		setModalVisible(false)
+	}
 
 	useEffect(() => {
 		planService.getPlans().then(({ plans }) => {
@@ -30,14 +50,12 @@ const Plans = (props) => {
 	const onSelectPlan = id => e => {
 		const plan = plans.find(plan => plan.id === id);
 		props.getPlan(plan);
-		history.push('/app/user/checkout')
+		showModal()
 	}
 
 	const displayPricing = () => {
 		if(plans.length !== 0){
 			return plans.map((elm , i) => {
-				// const features = JSON.parse(elm.features)
-				// console.log(features.join('/').split('\n'))
 				const featuresJson = JSON.parse(elm.features)
 				const features = featuresJson.join('/').split('\n')
 				if(elm.type === planType){
@@ -45,7 +63,6 @@ const Plans = (props) => {
 						<Col key={`price-column-${i}`} xs={24} sm={24} md={24/colCount} lg={24/colCount} className={colCount === (i + 1) || isMobile ? '' : 'border-right'}>
 							<div className="p-3">
 								<div className="text-center">
-									{/* <img className="img-fluid" src={elm.image} alt="" /> */}
 									<h1 className="display-4 mt-4"> 
 										<span className="font-size-md d-inline-block mr-1" style={{transform: 'translate(0px, -17px)'}}>$</span>
 										<span>{elm.price}</span>
@@ -93,7 +110,8 @@ const Plans = (props) => {
 	}
 
 	return (
-		<Card>
+		<>
+			<Card>
 			<div className="container">
 				<div className="text-center mb-4">
 					<h2 className="font-weight-semibold">Pick a base plan</h2>
@@ -158,8 +176,15 @@ const Plans = (props) => {
 				</Row>
 			</div>
 		</Card>
+			
+		<Elements stripe={stripePromise}>
+			<PlanForm showModal={showModal} closeModal={closeModal} modalVisible={modalVisible} />
+		</Elements>
+		
+		</>
 	)
 }
+
 
 const mapDispatchToProps = {
 	getPlan
