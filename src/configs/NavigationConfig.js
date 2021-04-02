@@ -80,6 +80,14 @@ const dashBoardNavTree = [
         ]
       },
       {
+        key: 'coupons',
+        path: `${APP_PREFIX_PATH}/admin/coupons`,
+        title: 'Coupons',
+        icon: CreditCardOutlined,
+        breadcrumb: false,
+        submenu: []
+      },
+      {
         key: 'users',
         path: `${APP_PREFIX_PATH}/admin/users`,
         title: 'Users',
@@ -104,14 +112,6 @@ const dashBoardNavTree = [
           }
         ]
       },
-      // {
-      //   key: 'subscriptions',
-      //   path: `${APP_PREFIX_PATH}/admin/subscriptions`,
-      //   title: 'Subscriptions',
-      //   icon: ShoppingOutlined,
-      //   breadcrumb: false,
-      //   submenu: []
-      // },
       {
         key: 'tickets',
         path: `${APP_PREFIX_PATH}/admin/tickets`,
@@ -120,14 +120,6 @@ const dashBoardNavTree = [
         breadcrumb: false,
         submenu: []
       },
-      // {
-      //   key: 'feedback',
-      //   path: `${APP_PREFIX_PATH}/admin/feedback`,
-      //   title: 'feedback',
-      //   icon: TagOutlined,
-      //   breadcrumb: false,
-      //   submenu: []
-      // },
       {
         key: 'profile',
         path: `${APP_PREFIX_PATH}/admin/profile`,
@@ -151,14 +143,6 @@ const dashBoardNavTree = [
             breadcrumb: false,
             submenu: []
           },
-          // {
-          //   key: 'billing',
-          //   path: `${APP_PREFIX_PATH}/admin/profile/billing`,
-          //   title: 'Billing',
-          //   icon: CreditCardOutlined,
-          //   breadcrumb: false,
-          //   submenu: []
-          // },
         ]
       },
       {
