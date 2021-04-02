@@ -20,6 +20,7 @@ const AdminViews = (props) => {
 				<Route path={`${match.url}/licenses`} component={lazy(() => import(`./licenses`))} />
 				<Route path={`${match.url}/tickets`} component={lazy(() => import(`./tickets`))} />
 				<Route path={`${match.url}/subscriptions`} component={lazy(() => import(`./subscriptions`))} />
+				<Route path={`${match.url}/coupons`} component={lazy(() => import(`../admin-views/coupons`))} />
 				<Route path={`${match.url}/profile`} component={lazy(() => import(`./profile`))} />
 				<Route path={`${match.url}/signout`} component={lazy(() => import(`./signout`))} />
 			</Switch>

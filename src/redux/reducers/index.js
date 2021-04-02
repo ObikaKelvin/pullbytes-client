@@ -9,6 +9,7 @@ import SubscriptionReducer from './SubscriptionReducer';
 import PaymentReducer from './PaymentReducer';
 import TicketReducer from './TicketReducer';
 import NotificationReducer from './NotificationReducer';
+import CouponReducer from './CouponReducer';
 
 const reducers = combineReducers({
     theme: Theme,
@@ -20,7 +21,8 @@ const reducers = combineReducers({
     subscriptionReducer: SubscriptionReducer,
     PaymentReducer: PaymentReducer,
     notificationReducer: NotificationReducer,
-    ticketReducer: TicketReducer
+    ticketReducer: TicketReducer,
+    couponReducer: CouponReducer
 });
 
 export default reducers;

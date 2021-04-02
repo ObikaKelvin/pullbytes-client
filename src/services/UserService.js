@@ -11,7 +11,7 @@ userService.getUsers = function () {
 
 userService.createUser = function (user) {
   return fetch({
-    url: '/users_file',
+    url: '/users',
     method: 'post',
     data: user
   })
