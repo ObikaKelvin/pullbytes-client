@@ -23,13 +23,12 @@ const PlanForm = props => {
 			visible={props.modalVisible}
 			okText={plan ? `Pay now ($${plan.price})` : 'Pay now' }
 			onCancel={props.closeModal}
-            confirmLoading={true}
+            confirmLoading={submitLoading}
 			onOk={() => {
                 
                 form
                 .validateFields()
                 .then(values => {
-                    setSubmitLoading(false)
                 
                     const {stripe, elements, plan} = props;
             
@@ -89,7 +88,7 @@ const PlanForm = props => {
                     rules={
                         [
                         { 
-                            require: true,
+                            required: true,
                             message: 'Please enter card holder name!' 
                         }
                         ]
@@ -104,6 +103,7 @@ const PlanForm = props => {
                     rules={
                         [
                         { 
+                            required: true,
                             pattern: /(\d{4}[-. ]?){4}|\d{4}[-. ]?\d{6}[-. ]?\d{5}/g,
                             message: 'Please enter a valid credit card number!' 
                         }
@@ -120,6 +120,7 @@ const PlanForm = props => {
                         rules={
                             [
                             { 
+                                required: true,
                                 pattern: /^(0[1-9]|1[0-2])[- /.]\d{2}/,
                                 message: 'Please enter a valid date format!' 
                             }
@@ -136,6 +137,7 @@ const PlanForm = props => {
                         rules={
                             [
                             { 
+                                required: true,
                                 pattern: /^[0-9]{3,4}$/,
                                 message: 'Please enter a CVV code format!' 
                             }
