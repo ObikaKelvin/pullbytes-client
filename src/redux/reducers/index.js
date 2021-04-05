@@ -10,6 +10,7 @@ import PaymentReducer from './PaymentReducer';
 import TicketReducer from './TicketReducer';
 import NotificationReducer from './NotificationReducer';
 import CouponReducer from './CouponReducer';
+import PromoCodeReducer from './PromoCodeReducer';
 
 const reducers = combineReducers({
     theme: Theme,
@@ -22,7 +23,8 @@ const reducers = combineReducers({
     PaymentReducer: PaymentReducer,
     notificationReducer: NotificationReducer,
     ticketReducer: TicketReducer,
-    couponReducer: CouponReducer
+    couponReducer: CouponReducer,
+    promoCodeReducer: PromoCodeReducer
 });
 
 export default reducers;

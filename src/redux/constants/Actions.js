@@ -48,4 +48,10 @@ export const GET_COUPON = 'GET_COUPON';
 export const UPDATE_COUPON = 'UPDATE_COUPON'; 
 export const DELETE_COUPON = 'DELETE_COUPON'; 
 
+export const CREATE_PROMO_CODE = 'CREATE_PROMO_CODE'; 
+export const GET_PROMO_CODES = 'GET_PROMO_CODES'; 
+export const GET_PROMO_CODE = 'GET_PROMO_CODE'; 
+export const UPDATE_PROMO_CODE = 'UPDATE_PROMO_CODE'; 
+export const DELETE_PROMO_CODE = 'DELETE_PROMO_CODE'; 
+
 export const CHECKOUT = 'CHECKOUT'; 

@@ -15,24 +15,23 @@ const menuItem = [
 	{
 		title: "Edit Profile",
 		icon: EditOutlined ,
-		path: "/"
-    },
-    
-    {
-		title: "Account Setting",
-		icon: SettingOutlined,
-		path: "/"
+		path: "profile/edit-profile"
     },
     {
-		title: "Billing",
-		icon: ShopOutlined ,
-		path: "/"
-	},
-    {
-		title: "Help Center",
-		icon: QuestionCircleOutlined,
-		path: "/"
-	}
+      title: "Change Password",
+      icon: EditOutlined ,
+      path: "profile/change-password"
+    },
+  //   {
+	// 	title: "Billing",
+	// 	icon: ShopOutlined ,
+	// 	path: "/"
+	// },
+    //   {
+    // 	title: "Help Center",
+    // 	icon: QuestionCircleOutlined,
+    // 	path: "/"
+    // }
 ]
 
 export const NavProfile = ({signOut, user}) => {

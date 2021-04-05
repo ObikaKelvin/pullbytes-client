@@ -8,7 +8,7 @@ import Flex from 'components/shared-components/Flex'
 import GeneralField from './GeneralField'
 import { getCoupon, createCoupon, updateCoupon } from 'redux/actions/coupon';
 import CouponService from "services/CouponService"
-import PlanService from "services/PlanService"
+import PromoCodeService from "services/PromoCodeService"
 
 
 const { TabPane } = Tabs;
@@ -87,7 +87,9 @@ const CouponForm = props => {
 					}, 1000)
 				}).catch(err => {
 					setSubmitLoading(false);
-				});;
+				});
+
+				// PromoCodeService
 			}
 			if(mode === EDIT) {
 				const { id } = param;
