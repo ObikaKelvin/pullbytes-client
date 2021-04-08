@@ -79,7 +79,7 @@ const GeneralField = props => {
 					<Input placeholder="Password" type="password" />
 				</Form.Item>
 				<Form.Item name="confirm_password" label="Confirm Password" rules={rules.confirm_password}>
-					<Input placeholder="Confirm Password" type="confirm_password" />
+					<Input placeholder="Confirm Password" type="password" />
 				</Form.Item>
 			</Card>
 		</Col>
