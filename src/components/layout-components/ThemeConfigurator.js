@@ -158,25 +158,7 @@ export const ThemeConfigurator = ({
 					}
 				/>
 			</div>
-			<div className="mb-5">
-				<h4 className="mb-3 font-weight-bold">Locale</h4>
-				<ListOption 
-					name="Language:"
-					selector={
-						<NavLanguage configDisplay/>
-					}
-				/>
-			</div>
-			<div>
-				<CopyToClipboard
-					text={genCopySettingJson({ navType, sideNavTheme, navCollapsed, topNavColor, headerNavColor, locale, currentTheme})}
-					onCopy={() => message.success('Copy Success, please paste it to src/configs/AppConfig.js THEME_CONFIG variable.') }
-				>
-					<Button icon={<CopyOutlined /> } block>
-						<span>Copy Setting</span>
-					</Button>
-				</CopyToClipboard>
-			</div>
+			
 		</>
 	)
 }
