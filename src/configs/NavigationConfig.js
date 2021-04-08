@@ -85,7 +85,24 @@ const dashBoardNavTree = [
         title: 'Coupons',
         icon: CreditCardOutlined,
         breadcrumb: false,
-        submenu: []
+        submenu: [
+          {
+            key: 'coupons-list',
+            path: `${APP_PREFIX_PATH}/admin/coupons/`,
+            title: 'coupon list',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
+          },
+          {
+            key: 'add-coupon',
+            path: `${APP_PREFIX_PATH}/admin/coupons/add`,
+            title: 'add coupon',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
+          }
+        ]
       },
       {
         key: 'users',
@@ -118,7 +135,24 @@ const dashBoardNavTree = [
         title: 'tickets',
         icon: FileExclamationOutlined,
         breadcrumb: false,
-        submenu: []
+        submenu: [
+          {
+            key: 'tickets-list',
+            path: `${APP_PREFIX_PATH}/admin/tickets`,
+            title: 'ticket list',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
+          },
+          {
+            key: 'add-ticket',
+            path: `${APP_PREFIX_PATH}/admin/tickets/add`,
+            title: 'add ticket',
+            icon: '',
+            breadcrumb: false,
+            submenu: []
+          }
+        ]
       },
       {
         key: 'profile',
