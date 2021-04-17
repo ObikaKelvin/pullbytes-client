@@ -52,37 +52,6 @@ const getShippingStatus = status => {
 	return ''
 }
 
-
-const TopPlans = () => (
-	<Card 
-		title="Top Plans" 
-		extra={
-			<Select defaultValue="week" size="small" style={{minWidth: 110}}>
-				<Option value="week">This Week</Option>
-				<Option value="month">This Month</Option>
-				<Option value="year">This Year</Option>
-			</Select>
-		}
-	>
-		{topPlansData.map(elm => (
-			<Flex className="w-100 py-3" justifyContent="between" alignItems="center" key={elm.name}>
-				<AvatarStatus shape="square" src={elm.image} name={elm.name} subTitle={elm.category}/>
-				<Flex>
-					<div className="mr-3 text-right">
-						<span className="text-muted">Sales</span>
-						<div className="mb-0 h5 font-weight-bold">
-							<NumberFormat prefix={'$'} value={elm.sales} thousandSeparator={true} displayType="text" />
-							{elm.status === 'up' ? <ArrowUpOutlined className="text-success"/> : <ArrowDownOutlined className="text-danger"/>}
-						</div>
-					</div>
-				</Flex>
-			</Flex>
-		))}
-	</Card>
-)
-
-
-
 const tableColumns = [
 	{
 		title: 'ID',
@@ -152,26 +121,27 @@ const RecentOrder = () => (
 
 const Home = () => {
 	const [error, setError] =  useState({});
+	const [topPlansData, setTopPlansData] =  useState(null);
 	const [revenues, setRevenues] =  useState({
 		current_month_revenue: 0,
 		percent_increase: null
 	});
 
 	const [monthlyRevenues, setMonthlyRevenues] =  useState({
-		data: [],
-		months: [],
+		data: null,
+		months: null,
 	});
 
 	const [salesStats, setSalesStats] =  useState({
-		"total_sales": 0,
-        "recurring_sales": 0,
-        "life_time_sales": 0,
-        "users_count": 0
+		total_sales: 0,
+        recurring_sales: 0,
+        life_time_sales: 0,
+        users_count: 0
 	});
 
 	const [planStats, setPlanStats] =  useState({
-		"plan_revenue": [],
-        "plan_sales": []
+		plan_revenue: null,
+        plan_sales: null
 	});
 
 	let { life_time_sales, recurring_sales, total_sales } = salesStats;
@@ -186,15 +156,6 @@ const Home = () => {
 				revenues: 'something went wrong'
 			})
 		}
-		// 	(<Result
-		// 	status="warning"
-		// 	title="There are some problems with your operation."
-		// 	extra={
-		// 	  <Button type="primary" key="console">
-		// 		Go Console
-		// 	  </Button>
-		// 	}
-		//   />)
 		)
 	}, [error.revenues]);
 
@@ -203,7 +164,18 @@ const Home = () => {
 			setSalesStats(sales_stats)
 			setPlanStats(plan_stats)
 		}).catch(e => {
-			console.log(e)
+			setError({
+				sales_stats: 'something went wrong'
+			})
+		})	
+		console.log(topPlansData)
+		SaleService.getPlansSalesStats().then(({ plan_revenue, plan_sales }) => {
+			setTopPlansData(plan_revenue)
+			console.log(plan_sales)
+		}).catch(e => {
+			setError({
+				sales_stats: 'something went wrong'
+			})
 		})	
 	}, [error.sales_stats]);
 
@@ -227,6 +199,37 @@ const Home = () => {
 		/>)
 	}
 
+	const TopPlans = () => {
+		if(topPlansData){
+			return(
+				<Card 
+					title="Top Plans" 
+				>
+					{topPlansData.map(elm => (
+						<Flex className="w-100 py-3" justifyContent="between" alignItems="center" key={elm.name}>
+							<span>{elm.name}</span>
+							<Flex>
+								<div className="mr-3 text-right">
+									<span className="text-muted">Sales</span>
+									<div className="mb-0 h5 font-weight-bold">
+										<NumberFormat prefix={'$'} value={elm.sales} thousandSeparator={true} displayType="text" />
+									</div>
+								</div>
+							</Flex>
+						</Flex>
+					))}
+				</Card>
+			)
+		}
+
+		return(
+			<Card>
+				<Skeleton active />
+			</Card>
+		)
+	}
+	
+
 	const display_percent_increase = () => {
 		
 		const { percent_increase, current_month_revenue } = revenues;
@@ -249,7 +252,6 @@ const Home = () => {
 			textColor = 'danger'; 
 			icon = <ArrowDownOutlined />;
 		}
-		console.log(percent_increase)
 		if(error.revenues){
 			return displayError(error.revenues);
 		}
@@ -281,16 +283,24 @@ const Home = () => {
 
 	const displayChartWidget = () => {
 		
+		const { data, months } = monthlyRevenues;
+
 		let series = [{
 			name: 'Sales',
-			data: monthlyRevenues.data
+			data
 		}]
 
+		if(!data && !months){
+			return <Skeleton active/>
+		}
+		if(error.revenues){
+			return displayError(error.revenues);
+		}
 		return(
 			<ChartWidget 
 				card={false}
 				series={series} 
-				xAxis={monthlyRevenues.months} 
+				xAxis={months} 
 				title="Unique Visitors"
 				height={250}
 				type="bar"
@@ -325,17 +335,20 @@ const Home = () => {
 		
 		let one_time_percent = 0;
 		let recurring_percent = 0;
-		if(life_time_sales === 0 && recurring_sales !== 0){
-			recurring_percent = 100;
-			one_time_percent = 0;
-		}else if(recurring_sales === 0 && life_time_sales !== 0){
-			one_time_percent = 100;
-			recurring_percent = 0;
-		}
-		else{
-			total_sales = parseInt(total_sales)
-			one_time_percent = parseInt(life_time_sales/total_sales * 100);
-			recurring_percent = parseInt(recurring_sales/total_sales * 100);	
+		console.log(recurring_sales)
+		if(life_time_sales && recurring_sales){
+			if(life_time_sales === 0 && recurring_sales !== 0){
+				recurring_percent = 100;
+				one_time_percent = 0;
+			}else if(recurring_sales === 0 && life_time_sales !== 0){
+				one_time_percent = 100;
+				recurring_percent = 0;
+			}
+			else{
+				total_sales = parseInt(total_sales)
+				one_time_percent = parseInt(life_time_sales/total_sales * 100);
+				recurring_percent = parseInt(recurring_sales/total_sales * 100);	
+			}
 		}
 		
 		return(
@@ -386,44 +399,51 @@ const Home = () => {
 		let combinedSessionData = []
 		const sessionData = []
 		const sessionLabels = []
+		if(plan_sales){
+			for (let i = 0; i < plan_sales.length; i++) {
+				const data = plan_sales[i].sale;
+				sessionData.push(data);
+				const label = `${plan_sales[i].name} - ${plan_sales[i].interval}`;
+				sessionLabels.push(label);
+				const color = sessionColor[i]
+				combinedSessionData = [...combinedSessionData, {
+					data: data,
+					label: label,
+					color: color
+				}]
+			}
 
-		for (let i = 0; i < plan_sales.length; i++) {
-			const data = plan_sales[i].sale;
-			sessionData.push(data);
-			const label = `${plan_sales[i].name} - ${plan_sales[i].interval}`;
-			sessionLabels.push(label);
-			const color = sessionColor[i]
-			combinedSessionData = [...combinedSessionData, {
-				data: data,
-				label: label,
-				color: color
-			}]
+			return(
+				<DonutChartWidget 
+					series={sessionData} 
+					labels={sessionLabels} 
+					title="Sales by Plan"
+					customOptions={{colors: sessionColor}}
+					extra={
+						<Row  justify="center">
+							<Col xs={20} sm={20} md={20} lg={24}>
+								<div className="mt-4 mx-auto" style={{maxWidth: 200}}>
+									{combinedSessionData.map(elm => (
+										<Flex alignItems="center" justifyContent="between" className="mb-3" key={elm.label}>
+											<div>
+												<Badge color={elm.color} />
+												<span className="text-gray-light">{elm.label}</span>
+											</div>
+											<span className="font-weight-bold text-dark">{elm.data}</span>
+										</Flex>
+									))}
+								</div>
+							</Col>
+						</Row>
+					}
+				/>
+			)
 		}
 
-		return(
-			<DonutChartWidget 
-				series={sessionData} 
-				labels={sessionLabels} 
-				title="Sales by Plan"
-				customOptions={{colors: sessionColor}}
-				extra={
-					<Row  justify="center">
-						<Col xs={20} sm={20} md={20} lg={24}>
-							<div className="mt-4 mx-auto" style={{maxWidth: 200}}>
-								{combinedSessionData.map(elm => (
-									<Flex alignItems="center" justifyContent="between" className="mb-3" key={elm.label}>
-										<div>
-											<Badge color={elm.color} />
-											<span className="text-gray-light">{elm.label}</span>
-										</div>
-										<span className="font-weight-bold text-dark">{elm.data}</span>
-									</Flex>
-								))}
-							</div>
-						</Col>
-					</Row>
-				}
-			/>
+		return (
+			<Card>
+				<Skeleton active />				
+			</Card>
 		)
 	}
 
@@ -445,11 +465,7 @@ const Home = () => {
 					<SalesByCategory />
 				</Col>
 			</Row>
-			<Row gutter={16}>
-				<Col xs={24} sm={24} md={24} lg={24}>
-					<RecentOrder />
-				</Col>
-			</Row>
+			
 		</>
 	)
 }
