@@ -9,7 +9,6 @@ const AdminViews = (props) => {
     const { match } = props;
     return (
 
-		<Suspense fallback={<Loading cover="content"/>}>
 			<Switch>
 				<Redirect exact from={`${match.url}`} to={`${match.url}/home`} />
 				{/* <Route path={`${match.url}`} component={Home} /> */}
@@ -24,7 +23,6 @@ const AdminViews = (props) => {
 				<Route path={`${match.url}/profile`} component={lazy(() => import(`./profile`))} />
 				<Route path={`${match.url}/signout`} component={lazy(() => import(`./signout`))} />
 			</Switch>
-		</Suspense>
 	)
 }
 

@@ -8,6 +8,7 @@ import { AUTH_TOKEN } from 'redux/constants/Auth'
 
 
 export const AppViews = (props) => {
+  console.log('hey')
   const { user } = props;
 
   const jwtToken = localStorage.getItem(AUTH_TOKEN)

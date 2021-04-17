@@ -57,7 +57,6 @@ export const HeaderNav = props => {
   })
 
   useEffect(() => {
-    console.log(token)
     UserService.me().then( ({ user }) => {
       setAuthUser(user);
     }).catch(error => {
