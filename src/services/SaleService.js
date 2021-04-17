@@ -16,4 +16,11 @@ planService.getSalesStats = function (id) {
   })
 }
 
+planService.getPlansSalesStats = function (id) {
+  return fetch({
+    url: `/get_plan_sales_stats`,
+    method: 'get'
+  })
+}
+
 export default planService
