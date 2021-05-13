@@ -163,20 +163,21 @@ const Home = () => {
 		SaleService.getSalesStats().then(({ sales_stats, plan_stats }) => {
 			setSalesStats(sales_stats)
 			setPlanStats(plan_stats)
+			setTopPlansData(plan_stats.plan_revenue)
 		}).catch(e => {
 			setError({
 				sales_stats: 'something went wrong'
 			})
 		})	
 		console.log(topPlansData)
-		SaleService.getPlansSalesStats().then(({ plan_revenue, plan_sales }) => {
-			setTopPlansData(plan_revenue)
-			console.log(plan_sales)
-		}).catch(e => {
-			setError({
-				sales_stats: 'something went wrong'
-			})
-		})	
+	// 	SaleService.getPlansSalesStats().then(({ plan_revenue, plan_sales }) => {
+	// 		// setTopPlansData(plan_revenue)
+	// 		console.log(plan_sales)
+	// 	}).catch(e => {
+	// 		setError({
+	// 			sales_stats: 'something went wrong'
+	// 		})
+	// 	})	
 	}, [error.sales_stats]);
 
 	const clearError = (message) => {
@@ -212,7 +213,7 @@ const Home = () => {
 								<div className="mr-3 text-right">
 									<span className="text-muted">Sales</span>
 									<div className="mb-0 h5 font-weight-bold">
-										<NumberFormat prefix={'$'} value={elm.sales} thousandSeparator={true} displayType="text" />
+										<NumberFormat prefix={'$'} value={elm.amount} thousandSeparator={true} displayType="text" />
 									</div>
 								</div>
 							</Flex>
