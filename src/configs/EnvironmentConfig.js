@@ -3,7 +3,7 @@ const dev = {
 };
 
 const prod = {
-  API_ENDPOINT_URL: 'https://wordpress-webhooks-api.herokuapp.com/api/v1/'
+  API_ENDPOINT_URL: 'https://pullbytes.herokuapp.com/api/v1/'
 };
 
 const test = {
