@@ -115,6 +115,7 @@ const LicenseList = (props) => {
 							unCheckedChildren={<CloseOutlined />}
 							checked={record.auto_renew === 'yes' ? true : false}
 							onChange={onAutoRenew(record.id)}
+							disabled={record.interval === 'lifetime' ? true : false}
 						/>
 					</>
 				)

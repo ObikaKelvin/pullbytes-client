@@ -93,13 +93,11 @@ const LicenseList = (props) => {
 	const onAutoRenew = id => e => {
 		if(e){
 			SubscriptionService.renewSubscription(id).then( ({ license }) => {
-				console.log(license)
 				setRenew(e)
 			});
 		}
 		else{
 			SubscriptionService.cancelSubscription(id).then( ({ license }) => {
-				console.log(license)
 				setRenew(e)
 			});
 		}
@@ -115,6 +113,11 @@ const LicenseList = (props) => {
 			title: 'Plan',
 			dataIndex: 'plan',
 			sorter: (a, b) => utils.antdTableSorter(a, b, 'plan')
+		},
+		{
+			title: 'Interval',
+			dataIndex: 'interval',
+			sorter: (a, b) => utils.antdTableSorter(a, b, 'interval')
 		},
 		{
 			title: 'User',
