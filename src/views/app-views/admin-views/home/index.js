@@ -163,7 +163,10 @@ const Home = () => {
 		SaleService.getSalesStats().then(({ sales_stats, plan_stats }) => {
 			setSalesStats(sales_stats)
 			setPlanStats(plan_stats)
-			setTopPlansData(plan_stats.plan_revenue)
+			const plan_revenue = [...plan_stats.plan_revenue];
+			const compare = (a, b) => a.amount.localeCompare(b.amount);
+			plan_revenue.sort(compare);
+			setTopPlansData(plan_revenue)
 		}).catch(e => {
 			setError({
 				sales_stats: 'something went wrong'
@@ -208,7 +211,7 @@ const Home = () => {
 				>
 					{topPlansData.map(elm => (
 						<Flex className="w-100 py-3" justifyContent="between" alignItems="center" key={elm.name}>
-							<span>{elm.name}</span>
+							<span>{elm.name} - {elm.interval}</span>
 							<Flex>
 								<div className="mr-3 text-right">
 									<span className="text-muted">Sales</span>
