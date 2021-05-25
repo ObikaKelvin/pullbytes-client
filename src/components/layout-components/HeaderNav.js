@@ -67,7 +67,7 @@ export const HeaderNav = props => {
   return (
     <Header className={`app-header ${navMode}`} style={{backgroundColor: headerNavColor}}>
       <div className={`app-header-wrapper ${isNavTop ? 'layout-top-nav' : ''}`}>
-        <Logo logoType={navMode}/>
+        {/* <Logo logoType={navMode}/> */}
         <div className="nav" style={{width: `calc(100% - ${getNavWidth()})`}}>
           <div className="nav-left">
             <ul className="ant-menu ant-menu-root ant-menu-horizontal">          
