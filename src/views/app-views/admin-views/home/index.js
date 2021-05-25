@@ -164,7 +164,7 @@ const Home = () => {
 			setSalesStats(sales_stats)
 			setPlanStats(plan_stats)
 			const plan_revenue = [...plan_stats.plan_revenue];
-			const compare = (a, b) => a.amount.localeCompare(b.amount);
+			const compare = (a, b) => b.amount - a.amount;
 			plan_revenue.sort(compare);
 			setTopPlansData(plan_revenue)
 		}).catch(e => {
